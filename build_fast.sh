@@ -90,6 +90,6 @@ sh kill_spring.sh
 
 echo "\n\n\n\n\n\n\n\n\n\n"
 
-echo '---------------------'
-echo 'bundle exec rake test'
-bundle exec rake test
+echo '----------------'
+echo 'bundle exec rake'
+bundle exec rake
