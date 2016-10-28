@@ -34,7 +34,11 @@ PG_HBA="/etc/postgresql/$PG_VERSION/main/pg_hba.conf"
 PG_CONF="/etc/postgresql/$PG_VERSION/main/postgresql.conf"
 
 # Change the settings in the pg_hba.conf file
-sudo bash -c "echo '# Database administrative login by Unix domain socket' > $PG_HBA"
+
+sudo bash -c "echo '# Allow adopta user to connect to database without password' > $PG_HBA"
+sudo bash -c "echo 'local   all             adopta                                  trust' >> $PG_HBA"
+sudo bash -c "echo '' >> $PG_HBA"
+sudo bash -c "echo '# Database administrative login by Unix domain socket' >> $PG_HBA"
 sudo bash -c "echo 'local   all             postgres                                peer' >> $PG_HBA"
 sudo bash -c "echo '' >> $PG_HBA"
 sudo bash -c "echo '# TYPE  DATABASE        USER            ADDRESS                 METHOD' >> $PG_HBA"
@@ -50,8 +54,6 @@ sudo bash -c "echo 'host    all             all             ::1/128             
 sudo bash -c "echo '' >> $PG_HBA"
 sudo bash -c "echo 'host    all             all             all                     md5' >> $PG_HBA"
 sudo bash -c "echo '' >> $PG_HBA"
-sudo bash -c "echo '# Allow adopta user to connect to database without password' >> $PG_HBA"
-sudo bash -c "echo 'local   all             adopta                                  trust' >> $PG_HBA"
 
 echo '-------------------'
 echo 'sudo apt-get update'
