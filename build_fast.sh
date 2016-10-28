@@ -76,6 +76,10 @@ echo 'sudo service postgresql restart'
 sudo service postgresql restart
 wait
 
+echo '--------------------------'
+echo 'bundle exec rake db:create'
+bundle exec rake db:create
+
 echo '---------------------------'
 echo 'bundle exec rake db:migrate'
 bundle exec rake db:migrate
