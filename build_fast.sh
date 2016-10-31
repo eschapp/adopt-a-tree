@@ -68,6 +68,10 @@ echo '------------------------------------------------------------------------'
 echo 'sudo -u postgres psql -c"CREATE DATABASE adopta_test WITH OWNER=adopta;"'
 sudo -u postgres psql -c"CREATE DATABASE adopta_test WITH OWNER=adopta;"
 
+echo '----------------------------------------------'
+echo 'bundle exec rake db:schema:load RAILS_ENV=test'
+bundle exec rake db:schema:load RAILS_ENV=test
+
 echo '---------------------------'
 echo 'bundle exec rake db:migrate'
 bundle exec rake db:migrate
