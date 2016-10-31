@@ -58,9 +58,15 @@ echo 'sudo service postgresql restart'
 sudo service postgresql restart
 wait
 
-echo '--------------------------'
-echo 'bundle exec rake db:create'
-bundle exec rake db:create
+# Creating the database for the development environment
+echo '-------------------------------------------------------------------------------'
+echo 'sudo -u postgres psql -c"CREATE DATABASE adopta_development WITH OWNER=adopta;"'
+sudo -u postgres psql -c"CREATE DATABASE adopta_development WITH OWNER=adopta;"
+
+# Creating the database for the testing environment
+echo '------------------------------------------------------------------------'
+echo 'sudo -u postgres psql -c"CREATE DATABASE adopta_test WITH OWNER=adopta;"'
+sudo -u postgres psql -c"CREATE DATABASE adopta_test WITH OWNER=adopta;"
 
 echo '---------------------------'
 echo 'bundle exec rake db:migrate'
