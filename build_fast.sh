@@ -34,7 +34,8 @@ PG_HBA="/etc/postgresql/$PG_VERSION/main/pg_hba.conf"
 PG_CONF="/etc/postgresql/$PG_VERSION/main/postgresql.conf"
 
 # Change the settings in the pg_hba.conf file
-
+# Use the original settings PostgreSQL provided at time of installation
+# but give adopta user database access without password
 sudo bash -c "echo '# Allow adopta user to connect to database without password' > $PG_HBA"
 sudo bash -c "echo 'local   all             adopta                                  trust' >> $PG_HBA"
 sudo bash -c "echo '' >> $PG_HBA"
@@ -43,17 +44,14 @@ sudo bash -c "echo 'local   all             postgres                            
 sudo bash -c "echo '' >> $PG_HBA"
 sudo bash -c "echo '# TYPE  DATABASE        USER            ADDRESS                 METHOD' >> $PG_HBA"
 sudo bash -c "echo '' >> $PG_HBA"
-sudo bash -c "echo '# local is for Unix domain socket connections only' >> $PG_HBA"
-sudo bash -c "echo 'local   all             all                                     md5' >> $PG_HBA"
+sudo bash -c "echo '# Unix domain socket connections only' >> $PG_HBA"
+sudo bash -c "echo 'local   all             all                                     peer' >> $PG_HBA"
 sudo bash -c "echo '' >> $PG_HBA"
 sudo bash -c "echo '# IPv4 local connections:' >> $PG_HBA"
-sudo bash -c "echo 'host    all             all             0.0.0.0/0            md5'  >> $PG_HBA"
+sudo bash -c "echo 'host    all             all             0.0.0.0/0            trust' >> $PG_HBA"
 sudo bash -c "echo '' >> $PG_HBA"
 sudo bash -c "echo '# IPv6 local connections:' >> $PG_HBA"
-sudo bash -c "echo 'host    all             all             ::1/128                 md5'  >> $PG_HBA"
-sudo bash -c "echo '' >> $PG_HBA"
-sudo bash -c "echo 'host    all             all             all                     md5' >> $PG_HBA"
-sudo bash -c "echo '' >> $PG_HBA"
+sudo bash -c "echo 'host    all             all             ::1/128                 md5' >> $PG_HBA"
 
 echo '-------------------------------'
 echo 'sudo service postgresql restart'
