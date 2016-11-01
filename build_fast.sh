@@ -45,14 +45,33 @@ echo 'sudo service postgresql restart'
 sudo service postgresql restart
 wait
 
+echo '-------------------'
+echo 'gem install bundler'
 gem install bundler
+
+echo '--------------'
+echo 'bundle install'
 bundle install
 
 echo '-------------------------------------'
 echo 'sudo -u postgres createuser -d adopta'
 sudo -u postgres createuser -d adopta
 
+echo '--------------------------'
+echo 'bundle exec rake db:create'
 bundle exec rake db:create
+
+# NOTE: You must run the "rake db:schema:load" command twice.
+# At least one adoption form test fails when
+# "rake db:schema:load" is run just once.
+
+echo '-------------------------------'
+echo 'bundle exec rake db:schema:load'
 bundle exec rake db:schema:load
+
+echo '-------------------------------'
+echo 'bundle exec rake db:schema:load'
+bundle exec rake db:schema:load
+
 bundle exec rake db:seed
 bundle exec rake
